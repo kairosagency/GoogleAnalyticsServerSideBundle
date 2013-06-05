@@ -2,7 +2,7 @@
     "name": "kairos/googleanalyticsserversidebundle",
     "type": "library",
     "description": "Google analytics vendor for symfony2",
-    "keywords": ["php-ga","google-analytics"],
+    "keywords": ["php-ga","google-analytics", "server-side-analytics"],
     "homepage": "https://github.com/kairosagency/GoogleAnalyticsServerSideBundle.git",
     "license": "",
     "authors": [
@@ -19,7 +19,8 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "symfony/framework-bundle": ">=2.1,<2.3-dev"
+        "symfony/framework-bundle": ">=2.1,<2.3-dev",
+        "kairos/googleanalyticsserverside": "dev-master"
     },
     "autoload": {
         "psr-0": { "GoogleAnalyticsServerSide": "" }
