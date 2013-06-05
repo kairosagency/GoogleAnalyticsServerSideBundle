@@ -1,0 +1,7 @@
+parameters:
+    google_analytics.class: Kairos\GoogleAnalytics\Tracker
+
+services:
+    google_analytics:
+        class: %google_analytics.class%
+        arguments:    [ %php_ga_accountID% , %php_ga_domain% ]
