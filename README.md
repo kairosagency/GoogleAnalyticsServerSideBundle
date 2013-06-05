@@ -27,7 +27,7 @@ Requires PHP 5.3 as namespaces and closures are used. Has no other dependencies 
 ``` js
     {
         "require": {
-            "kairos/googleanalytics": "dev-master"
+            "kairos/googleanalyticsserversidebundle": "dev-master"
         }
     }
 ```
@@ -35,7 +35,7 @@ Requires PHP 5.3 as namespaces and closures are used. Has no other dependencies 
 **Update your composer :**
 
 ``` bash
-    php composer.phar update kairos/googleanalytics
+    php composer.phar update kairos/googleanalyticsserversidebundle
 ```
 
 Composer will install the bundle to your project's vendor/kairos directory.
