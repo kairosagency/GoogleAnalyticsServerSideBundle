@@ -1,11 +1,10 @@
 {
     "name": "kairos/googleanalyticsserversidebundle",
     "type": "library",
-    "license": "LGPL-3.0"
+    "license": "LGPL-3.0",
     "description": "Google analytics vendor for symfony2",
     "keywords": ["php-ga","google-analytics", "server-side-analytics"],
     "homepage": "https://github.com/kairosagency/GoogleAnalyticsServerSideBundle.git",
-    "license": "",
     "authors": [
         {
             "name": "t0k4rt",
@@ -26,5 +25,5 @@
     "autoload": {
         "psr-0": { "GoogleAnalyticsServerSide": "" }
     },
-    "target-dir": "GoogleAnalyticsServerSIde"
+    "target-dir": "GoogleAnalyticsServerSide"
 }

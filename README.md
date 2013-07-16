@@ -76,6 +76,9 @@ You now can include the class in your controller
 And track page (or events etc.) :
 
 ``` php
+
+    use Kairos\GoogleAnalytics;
+
     // Initilize GA Tracker
     $tracker = $this->get('googleanalytics');
     
