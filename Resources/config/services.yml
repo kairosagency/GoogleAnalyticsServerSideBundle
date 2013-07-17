@@ -1,5 +1,5 @@
 parameters:
-    google_analytics.class: Kairos\GoogleAnalytics\Tracker
+    google_analytics.class: GoogleAnalyticsServerSide\Lib\Tracker
 
 services:
     google_analytics:
