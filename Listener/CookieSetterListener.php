@@ -4,7 +4,7 @@ namespace Kairos\GoogleAnalyticsServerSideBundle\Listener;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class CookieListener
+class CookieSetterListener
 {
     protected $cookies;
 

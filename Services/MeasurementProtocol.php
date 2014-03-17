@@ -4,7 +4,7 @@ namespace Kairos\GoogleAnalyticsServerSideBundle\Services;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-use Kairos\GoogleAnalyticsServerSideBundle\Listener\CookieListener;
+use Kairos\GoogleAnalyticsServerSideBundle\Listener\CookieSetterListener;
 
 use Krizon\Google\Analytics\MeasurementProtocol\MeasurementProtocolClient;
 
@@ -55,23 +55,23 @@ class MeasurementProtocol
     public function track($hitType, $args) {
 
         //get __gatm cookie content
-        $gamp = $this->request->cookies->get('__gatmp');
+        $gamp = $this->request->cookies->get('__gamp');
 
         // if cookie is null, we create a new cookie
         if(is_null($gamp)) {
             $gamp = self::uuid4();
 
             $now = new \DateTime();
-            $in2years = $now->add(new \DateInterval('P2Y'));
+            $in2years = $now->add(new \DateInterval('P6M'));
 
-            $cookieListener = new CookieListener(
+            $cookieSetterListener = new CookieSetterListener(
                 array('__gamp' =>  array(
                     'value' => $gamp,
                     'expire' => $in2years->getTimestamp())
                 )
             );
             // we set the cookie value in the kernel.response event
-            $this->container->get('event_dispatcher')->addListener('kernel.response', array($cookieListener, 'onKernelResponse'));
+            $this->container->get('event_dispatcher')->addListener('kernel.response', array($cookieSetterListener, 'onKernelResponse'));
         }
 
         $default = array(
