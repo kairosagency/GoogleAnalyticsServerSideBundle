@@ -1,7 +1,11 @@
 parameters:
     google_analytics.class: Kairos\GoogleAnalytics\Tracker
+    google_analytics.measurement_protocol.class: Kairos\GoogleAnalyticsBundle\MeasurementProtocol
 
 services:
     google_analytics:
         class: %google_analytics.class%
         arguments:    [ %php_ga_accountID% , %php_ga_domain% ]
+    google_analytics.measurement_protocol:
+          class: %google_analytics.measurement_protocol.class%
+          arguments:    [ @container, %php_ga_accountID% , %php_ga_domain%, %ssl% ]
