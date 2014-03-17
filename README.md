@@ -50,7 +50,7 @@ Composer will install the bundle to your project's vendor/kairos directory.
     {
         $bundles = array(
             // ...
-            new GoogleAnalytics\GoogleAnalyticsBundle(),
+            new GoogleAnalyticsServerSide\GoogleAnalyticsBundle(),
         );
     }
 ```
@@ -70,17 +70,15 @@ Composer will install the bundle to your project's vendor/kairos directory.
 You now can include the class in your controller
 
 ``` php
-    use GoogleAnalytics;
+    use Kairos\GoogleAnalytics;
 ```
 
 And track page (or events etc.) :
 
 ``` php
 
-    use Kairos\GoogleAnalytics;
-
     // Initilize GA Tracker
-    $tracker = $this->get('googleanalytics');
+    $tracker = $this->get('google_analytics');
     
     // Assemble Visitor information (could also get unserialized from database)
     $visitor = new GoogleAnalytics\Visitor();
