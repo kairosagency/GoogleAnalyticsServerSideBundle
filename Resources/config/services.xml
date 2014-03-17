@@ -13,13 +13,13 @@
     </parameters>
 
     <services>
-        <service id="kairos_google_analytics_server_side.classic_tracker" class="%kairos_google_analytics_server_side.classic_tracker.class%" alias="ga.tracker">
+        <service id="kairos_google_analytics_server_side.classic_tracker" class="%kairos_google_analytics_server_side.classic_tracker.class%">
             <argument>%kairos_google_analytics_server_side.account_id%</argument>
             <argument>%kairos_google_analytics_server_side.domain%</argument>
         </service>
         <service id="ga_classic_tracker" alias="kairos_google_analytics_server_side.classic_tracker" />
 
-        <service id="kairos_google_analytics_server_side.measurement_protocol" class="%kairos_google_analytics_server_side.measurement_protocol.class%" alias="ga.mp.tracker">
+        <service id="kairos_google_analytics_server_side.measurement_protocol" class="%kairos_google_analytics_server_side.measurement_protocol.class%">
             <argument type="service" id="service_container" />
             <argument>%kairos_google_analytics_server_side.account_id%</argument>
             <argument>%kairos_google_analytics_server_side.domain%</argument>
