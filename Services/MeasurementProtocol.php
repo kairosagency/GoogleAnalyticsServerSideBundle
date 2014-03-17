@@ -1,5 +1,5 @@
 <?php
-namespace Kairos\GoogleAnalyticsBundle;
+namespace Kairos\GoogleAnalyticsBundle\Services;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;

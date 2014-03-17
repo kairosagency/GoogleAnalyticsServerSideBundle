@@ -1,11 +1,12 @@
 parameters:
     google_analytics.measurement_protocol.class: Kairos\GoogleAnalyticsBundle\MeasurementProtocol
     google_analytics.class: Kairos\GoogleAnalyticsBundle\ClassicTracker
+    google_analytics_serverside.account_id:
 
 services:
     google_analytics:
         class: %google_analytics.class%
-        arguments:    [ %php_ga_accountID% , %php_ga_domain% ]
+        arguments:    [ %google_analytics_serverside.account_id% , %google_analytics_serverside.domain% ]
     google_analytics.measurement_protocol:
           class: %google_analytics.measurement_protocol.class%
-          arguments:    [ @container, %php_ga_accountID% , %php_ga_domain%, %ssl% ]
+          arguments:    [ @container, %google_analytics_serverside.account_id% , %google_analytics_serverside.domain%, %google_analytics_serverside.ssl% ]

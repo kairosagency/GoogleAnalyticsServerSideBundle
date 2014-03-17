@@ -1,6 +1,6 @@
 <?php
 
-namespace GoogleAnalyticsServerSide\DependencyInjection;
+namespace Kairos\GoogleAnalyticsServerSide\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

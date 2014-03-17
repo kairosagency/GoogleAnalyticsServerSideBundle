@@ -4,11 +4,11 @@
  * {@inheritdoc}
  */
 
-namespace Kairos\GoogleAnalyticsBundle;
+namespace Kairos\GoogleAnalyticsBundle\Services;
 
 use Kairos\GoogleAnalytics\Tracker as BaseTracker;
 
-class Tracker extends BaseTracker
+class ClassicTracker extends BaseTracker
 {
     /**
      * @param $request

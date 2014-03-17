@@ -23,7 +23,7 @@
         "kairos/googleanalyticsserverside": "dev-master"
     },
     "autoload": {
-        "psr-0": { "GoogleAnalyticsServerSide": "" }
+        "psr-0": { "Kairos\\GoogleAnalyticsServerSide": "" }
     },
-    "target-dir": "GoogleAnalyticsServerSide"
+    "target-dir": "Kairos/GoogleAnalyticsServerSide"
 }
