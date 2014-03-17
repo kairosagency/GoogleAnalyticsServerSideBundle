@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('google_analytics');
+        $rootNode = $treeBuilder->root('kairos_google_analytics_server_side');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
@@ -26,12 +26,12 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('php_ga_accountID')
+                ->scalarNode('account_id')
                     ->isRequired()->cannotBeEmpty()
                     ->info('your google account id')
                     ->example('UA-XXXXXXXX-XX')
                 ->end()
-                ->scalarNode('php_ga_domain')
+                ->scalarNode('domain')
                     ->defaultNull()
                     ->info('domain to track')
                     ->example('google.com')

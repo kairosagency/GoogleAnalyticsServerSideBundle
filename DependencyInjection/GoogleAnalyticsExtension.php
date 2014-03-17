@@ -22,12 +22,11 @@ class GoogleAnalyticsExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $container->setParameter('google_analytics_server_side.account_id', $config['account_id']);
+        $container->setParameter('google_analytics_server_side.domain', $config['domain']);
+        $container->setParameter('google_analytics_server_side.ssl', $config['ssl']);
+
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-
-        $container->setParameter('google_analytics_serverside.account_id', $config['account_id']);
-        $container->setParameter('google_analytics_serverside.domain', $config['domain']);
-        $container->setParameter('google_analytics_serverside.ssl', $config['ssl']);
-
     }
 }
