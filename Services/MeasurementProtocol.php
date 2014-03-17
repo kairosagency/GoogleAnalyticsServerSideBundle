@@ -1,10 +1,10 @@
 <?php
-namespace Kairos\GoogleAnalyticsBundle\Services;
+namespace Kairos\GoogleAnalyticsServerSideBundle\Services;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-use Kairos\GoogleAnalyticsBundle\Listener\CookieListener;
+use Kairos\GoogleAnalyticsServerSideBundle\Listener\CookieListener;
 
 use Krizon\Google\Analytics\MeasurementProtocol\MeasurementProtocolClient;
 

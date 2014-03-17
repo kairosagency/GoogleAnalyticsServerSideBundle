@@ -1,6 +1,6 @@
 parameters:
-    google_analytics.measurement_protocol.class: Kairos\GoogleAnalyticsBundle\MeasurementProtocol
-    google_analytics.class: Kairos\GoogleAnalyticsBundle\ClassicTracker
+    google_analytics.measurement_protocol.class: Kairos\GoogleAnalyticsServerSideBundle\MeasurementProtocol
+    google_analytics.class: Kairos\GoogleAnalyticsServerSideBundle\ClassicTracker
     google_analytics_serverside.account_id:
 
 services:

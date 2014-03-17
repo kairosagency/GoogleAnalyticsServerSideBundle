@@ -4,7 +4,7 @@
  * {@inheritdoc}
  */
 
-namespace Kairos\GoogleAnalyticsBundle\Services;
+namespace Kairos\GoogleAnalyticsServerSideBundle\Services;
 
 use Kairos\GoogleAnalytics\Tracker as BaseTracker;
 

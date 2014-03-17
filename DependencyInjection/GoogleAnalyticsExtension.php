@@ -1,6 +1,6 @@
 <?php
 
-namespace Kairos\GoogleAnalyticsServerSide\DependencyInjection;
+namespace Kairos\GoogleAnalyticsServerSideBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
