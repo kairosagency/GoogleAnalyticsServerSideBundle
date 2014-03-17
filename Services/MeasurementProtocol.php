@@ -54,6 +54,7 @@ class MeasurementProtocol
 
     public function track($hitType, $args) {
 
+
         //get __gatm cookie content
         $gamp = $this->request->cookies->get('__gatmp');
 
