@@ -80,7 +80,6 @@ class MeasurementProtocol
             'uip' => $this->request->getClientIp()
         );
 
-
         // est ce que je dois vraiment vérifier ça ?
         if(is_callable(array($this->client, $hitType), true))
             return call_user_func(array($this->client, $hitType), array_merge($default, $args));
