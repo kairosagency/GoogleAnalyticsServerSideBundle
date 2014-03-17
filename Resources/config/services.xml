@@ -23,5 +23,6 @@
             <argument>%google_analytics_serverside.domain%</argument>
             <argument>%google_analytics_serverside.ssl%</argument>
         </service>
+
     </services>
 </container>
