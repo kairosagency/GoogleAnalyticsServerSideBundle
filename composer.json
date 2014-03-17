@@ -24,7 +24,7 @@
         "krizon/php-ga-measurement-protocol": "dev-master"
     },
     "autoload": {
-        "psr-0": { "Kairos\\GoogleAnalyticsServerSide": "" }
+        "psr-0": { "Kairos\\GoogleAnalyticsServerSideBundle": "" }
     },
-    "target-dir": "Kairos/GoogleAnalyticsServerSide"
+    "target-dir": "Kairos/GoogleAnalyticsServerSideBundle"
 }
