@@ -86,7 +86,7 @@ class MeasurementProtocol
             $default['ul'] = $locales[0];
         }
 
-        // est ce que je dois vraiment vérifier ça ?
+        //check if the function is callable
         if(is_callable(array($this->client, $hitType), true))
             return call_user_func(array($this->client, $hitType), array_merge($default, $args));
         else
