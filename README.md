@@ -112,6 +112,12 @@ To use ga.js on client side, you have to register the ga_js_tracker service in y
     {{ gajs.getGAjs()|raw }}
 ```
 
+You can override trackingId and Domain by calling the function with these parameters :
+
+```
+    {{ gajs.getGAjs('trackingID','domain')|raw }}
+```
+
 Don't forget the raw if you don't want the tag to be escaped. Your ga.js session will be automatically synched with your server side session (client id is shared in the cookies).
 
 
