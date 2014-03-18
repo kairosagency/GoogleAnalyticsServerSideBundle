@@ -56,24 +56,24 @@ class MeasurementProtocol
 
         //get __gatm cookie content
         $gamp = $this->request->cookies->get('__gamp');
+        $ga = $this->request->cookies->get('_ga');
 
         // if cookie is null, we create a new cookie
         if(is_null($gamp)) {
             $gamp = self::uuid4();
-
-            $now = new \DateTime();
-            $in6months = $now->add(new \DateInterval('P6M'));
-
-            $cookieSetterListener = new CookieSetterListener(
-                array('__gamp' =>  array(
-                    'value' => $gamp,
-                    'expire' => $in6months->getTimestamp())
-                )
-            );
-            // we set the cookie value in the kernel.response event
-            $this->container->get('event_dispatcher')->addListener('kernel.response', array($cookieSetterListener, 'onKernelResponse'));
+            $this->setGampCookie($gamp);
         }
 
+        // case gajs is also running
+        if($ga) {
+            // we parse client id
+            $gaClientId = implode('.', array_slice(explode('.', $ga), -2, 2));
+            if($gamp != $gaClientId) {
+                //we sync __gamp cookie value with ga cookie
+                $gamp = $gaClientId;
+                $this->setGampCookie($gamp);
+            }
+        }
 
         $default = array(
             'cid' => $gamp,
@@ -91,6 +91,21 @@ class MeasurementProtocol
             return call_user_func(array($this->client, $hitType), array_merge($default, $args));
         else
             return null;
+    }
+
+
+    public function setGampCookie($gampCookieValue)
+    {
+        $now = new \DateTime();
+        $in6months = $now->add(new \DateInterval('P6M'));
+        $cookieSetterListener = new CookieSetterListener(
+            array('__gamp' =>  array(
+                'value' => $gampCookieValue,
+                'expire' => $in6months->getTimestamp())
+            )
+        );
+        // we set the cookie value in the kernel.response event
+        $this->container->get('event_dispatcher')->addListener('kernel.response', array($cookieSetterListener, 'onKernelResponse'));
     }
 
 
