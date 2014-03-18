@@ -1,20 +1,18 @@
 Getting Started With Server-Side Google Analytics PHP Client
 ==================================
 
-## Important  
-This package is directly based on this project from UnitedPrototype : http://code.google.com/p/php-ga/ 
+## Important
 
-This package is aimed at using php-ga in symfony 2 as a vendor and a service.
+This bundle has been updated to support universal analytics.
 
 
 ## Summary :
-"ga.js in PHP" - Implementation of a generic server-side Google Analytics client in PHP that implements nearly every parameter and tracking feature of the original GA Javascript client.
 
-We love Google Analytics and want to contribute to its community with this PHP client implementation. It is intended to be used stand-alone or in addition to an existing Javascript library implementation.
+Google Analytics Server Side Bundle is aimed at sending google analytics hits from a server.
+This can be very usefull for an app, or in case google analytics is blocked.
 
-It's PHP, but porting it to e.g. Ruby or Python should be easy. Building this library involved weeks of documentation reading, googling and testing - therefore its source code is thorougly well-documented.
+This bundle made originally use of the great project from UnitedPrototype : http://code.google.com/p/php-ga/
 
-The PHP client has nothing todo with the Data Export or Management APIs, although you can of course use them in combination.
 
 ## Requirements
 
@@ -50,30 +48,75 @@ Composer will install the bundle to your project's vendor/kairos directory.
     {
         $bundles = array(
             // ...
-            new GoogleAnalyticsServerSide\GoogleAnalyticsBundle(),
+            new Kairos\GoogleAnalyticsServerSideBundle\KairosGoogleAnalyticsServerSideBundle(),
         );
     }
 ```
 
-**In your parameters.yml**
+**In your config.yml**
 
 ``` yaml
-    parameters:
-        php_ga_accountID:   UA-12345678-9
-        php_ga_domain:      yourwebsite.com
+    kairos_google_analytics_server_side:
+        account_id:  UA-XXXXXXXX-XX
+        domain:     your.domain
+        ssl: false
+```
+
+**If you want to use also js tracking**
+
+``` yaml
+    twig:
+        globals:
+            gajs: "@ga_js_tracker"
 ```
 
 ## How To use :
 
-**In your bundle :**
+### With the new universal analytics :
 
-You now can include the class in your controller
+**Super Bonus !**
+You can use both serverside and client side ! The session will be synched between your serverside and client side code so no doubles
+
+#### Serverside usage :
+
+You can use directly the documentation given by google at the address :
+https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters
 
 ``` php
-    use Kairos\GoogleAnalytics;
+
+    // Call tracker from container
+    $this->container->get('ga_mp_tracker')->track('pageview',
+        array(
+            'dp' => 'your.address.com',
+            'dt' => 'your title'
+        )
+    );
+
+    // Track event
+    $this->container->get('ga_mp_tracker')->track('event',
+        array(
+            'dp' => 'your.address.com',
+            'dt' => 'your title',
+            'ec' => 'event category',
+            'ea' => 'event action',
+            'el' => 'event label',
+        )
+    );
 ```
 
-And track page (or events etc.) :
+#### Client side usage :
+
+To use ga.js on client side, you have to register the ga_js_tracker service in your twig config, then you'll be able to call it this way :
+
+```
+    {{ gajs.getGAjs()|raw }}
+```
+
+Don't forget the raw if you don't want the tag to be escaped. Your ga.js session will be automatically synched with your server side session (client id is shared in the cookies).
+
+
+
+#### With an old google analytics account :
 
 ``` php
 
@@ -99,3 +142,10 @@ And track page (or events etc.) :
 
 - [Read more](https://github.com/kairosagency/GoogleAnalyticsBundle/tree/master/Resources/doc/index.md)
 - [Using Cookies](https://github.com/kairosagency/GoogleAnalyticsBundle/tree/master/Resources/doc/using_cookies.md)
+
+
+
+
+## Thanks
+
+This package is directly based on this project from UnitedPrototype : http://code.google.com/p/php-ga/
