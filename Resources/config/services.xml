@@ -29,13 +29,11 @@
         </service>
         <service id="ga_mp_tracker" alias="kairos_google_analytics_server_side.measurement_protocol" />
 
-
         <service id="kairos_google_analytics_server_side.js_tracker" class="%kairos_google_analytics_server_side.js_tracker.class%">
             <argument>%kairos_google_analytics_server_side.account_id%</argument>
             <argument>%kairos_google_analytics_server_side.domain%</argument>
         </service>
         <service id="ga_js_tracker" alias="kairos_google_analytics_server_side.js_tracker" />
-
 
     </services>
 </container>
