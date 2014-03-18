@@ -74,12 +74,17 @@ class MeasurementProtocol
             $this->container->get('event_dispatcher')->addListener('kernel.response', array($cookieSetterListener, 'onKernelResponse'));
         }
 
+
         $default = array(
             'cid' => $gamp,
             'ua' => $this->request->server->get('HTTP_USER_AGENT'),
-            'uip' => $this->request->getClientIp(),
-            'ul' => $this->request->getLocale()
+            'uip' => $this->request->getClientIp()
         );
+
+        $locales = $this->request->getLanguages();
+        if(count($locales) > 0){
+            $default['ul'] = $locales[0];
+        }
 
         // est ce que je dois vraiment vérifier ça ?
         if(is_callable(array($this->client, $hitType), true))
