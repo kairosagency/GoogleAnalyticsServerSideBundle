@@ -62,12 +62,12 @@ class MeasurementProtocol
             $gamp = self::uuid4();
 
             $now = new \DateTime();
-            $in2years = $now->add(new \DateInterval('P6M'));
+            $in6months = $now->add(new \DateInterval('P6M'));
 
             $cookieSetterListener = new CookieSetterListener(
                 array('__gamp' =>  array(
                     'value' => $gamp,
-                    'expire' => $in2years->getTimestamp())
+                    'expire' => $in6months->getTimestamp())
                 )
             );
             // we set the cookie value in the kernel.response event
@@ -77,7 +77,8 @@ class MeasurementProtocol
         $default = array(
             'cid' => $gamp,
             'ua' => $this->request->server->get('HTTP_USER_AGENT'),
-            'uip' => $this->request->getClientIp()
+            'uip' => $this->request->getClientIp(),
+            'ul' => $this->request->getLocale()
         );
 
         // est ce que je dois vraiment vérifier ça ?
