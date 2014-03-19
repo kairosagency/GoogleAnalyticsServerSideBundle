@@ -41,6 +41,11 @@ class Configuration implements ConfigurationInterface
                     ->info('use ssl')
                     ->example('true or false')
                 ->end()
+                ->scalarNode('localhost')
+                    ->defaultFalse()
+                    ->info('if you develop on localhost')
+                    ->example('true or false')
+                ->end()
             ->end();
 
         return $treeBuilder;

@@ -28,5 +28,6 @@ class KairosGoogleAnalyticsServerSideExtension extends Extension
         $container->setParameter('kairos_google_analytics_server_side.account_id', $config['account_id']);
         $container->setParameter('kairos_google_analytics_server_side.domain', $config['domain']);
         $container->setParameter('kairos_google_analytics_server_side.ssl', $config['ssl']);
+        $container->setParameter('kairos_google_analytics_server_side.localhost', $config['localhost']);
     }
 }
