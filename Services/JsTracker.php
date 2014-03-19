@@ -2,6 +2,8 @@
 namespace Kairos\GoogleAnalyticsServerSideBundle\Services;
 
 
+use Kairos\GoogleAnalyticsServerSideBundle\Services\MeasurementProtocol;
+
 class JsTracker
 {
     /**
@@ -15,13 +17,18 @@ class JsTracker
     protected $domain;
 
     /**
-     * @param ContainerInterface $container
-     * @param string $trackingID
-     * @param string $domain
-     * @param bool $ssl
+     * @var \Kairos\GoogleAnalyticsServerSideBundle\Services\MeasurementProtocolTracker
      */
-    public function __construct($trackingID, $domain)
+    protected $measurementProtocolTracker;
+
+    /**
+     * @param MeasurementProtocolTracker $measurementProtocolTracker
+     * @param $trackingID
+     * @param $domain
+     */
+    public function __construct(MeasurementProtocolTracker $measurementProtocolTracker, $trackingID, $domain)
     {
+        $this->measurementProtocolTracker = $measurementProtocolTracker;
         $this->trackingID   = $trackingID;
         $this->domain       = $domain;
     }
@@ -54,9 +61,17 @@ class JsTracker
             . "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){"
             . "(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),"
             . "m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)"
-            . "})(window,document,'script','//www.google-analytics.com/analytics.js','ga');"
-            . "ga('create', '". $_tid ."', '". $_domain ."');"
-            ."</script>";
+            . "})(window,document,'script','//www.google-analytics.com/analytics.js','ga');";
+
+        // we force gajs to use our client id
+        if($this->measurementProtocolTracker->hasCookie()) {
+            $gascript .= "ga('create', '". $_tid ."', '". $_domain ."', { 'clientId' : '". $this->measurementProtocolTracker->getClientId() ."' }); </script>";
+        }
+        else {
+            $gascript .= "ga('create', '". $_tid ."', '". $_domain ."'); </script>";
+        }
+
+
 
         return $gascript;
     }

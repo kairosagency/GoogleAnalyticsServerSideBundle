@@ -8,7 +8,7 @@ use Kairos\GoogleAnalyticsServerSideBundle\Listener\CookieSetterListener;
 
 use Krizon\Google\Analytics\MeasurementProtocol\MeasurementProtocolClient;
 
-class MeasurementProtocol
+class MeasurementProtocolTracker
 {
     /**
      * @var \Symfony\Component\HttpFoundation\Request
@@ -36,6 +36,18 @@ class MeasurementProtocol
     protected $client;
 
     /**
+     * Google analytics client id
+     *
+     * @var string
+     */
+    protected $clientId;
+
+    /**
+     * @var bool
+     */
+    protected $hasCookie;
+
+    /**
      * @param ContainerInterface $container
      * @param string $trackingID
      * @param string $domain
@@ -43,40 +55,70 @@ class MeasurementProtocol
      */
     public function __construct(ContainerInterface $container, $trackingID, $domain, $ssl = false)
     {
+        $this->hasCookie    = true;
         $this->container    = $container;
         $this->request      = $this->container->get('request');
         $this->trackingID   = $trackingID;
         $this->domain       = $domain;
-
-        $this->client = MeasurementProtocolClient::factory(array('ssl' => $ssl));
+        $this->clientId     = $this->setClientId();
+        $this->client       = MeasurementProtocolClient::factory(array('ssl' => $ssl));
     }
+
+    /**
+     * @return string
+     */
+    private function setClientId() {
+        $gamp = $this->request->cookies->get('__gamp');
+        $ga = $this->request->cookies->get('_ga');
+
+        // case gajs is already or concurrently running
+        if($ga) {
+            // we parse client id (we should be carefull with this part, in case client id changes)
+            $gaClientId = implode('.', array_slice(explode('.', $ga), -2, 2));
+
+            // we force our cookie to sync with ga cookie client Id
+            if($gamp != $gaClientId) {
+                $this->hasCookie = false;
+            }
+            return $gaClientId;
+        }
+
+        //if gajs is not running and there is no client id we generate a new one
+        if(is_null($gamp)) {
+            $this->hasCookie = false;
+            return self::gaid();
+        }
+
+        return $gamp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClientId() {
+        return $this->clientId;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function hasCookie() {
+        return $this->hasCookie;
+    }
+
+
 
 
     public function track($hitType, $args) {
 
-        //get __gatm cookie content
-        $gamp = $this->request->cookies->get('__gamp');
-        $ga = $this->request->cookies->get('_ga');
-
-        // if cookie is null, we create a new cookie
-        if(is_null($gamp)) {
-            $gamp = self::uuid4();
-            $this->setGampCookie($gamp);
+        if(!$this->hasCookie) {
+            $this->setGampCookie($this->clientId);
         }
 
-        // case gajs is also running
-        if($ga) {
-            // we parse client id
-            $gaClientId = implode('.', array_slice(explode('.', $ga), -2, 2));
-            if($gamp != $gaClientId) {
-                //we sync __gamp cookie value with ga cookie
-                $gamp = $gaClientId;
-                $this->setGampCookie($gamp);
-            }
-        }
 
         $default = array(
-            'cid' => $gamp,
+            'cid' => $this->clientId,
             'ua' => $this->request->server->get('HTTP_USER_AGENT'),
             'uip' => $this->request->getClientIp()
         );
@@ -94,13 +136,13 @@ class MeasurementProtocol
     }
 
 
-    public function setGampCookie($gampCookieValue)
+    public function setGampCookie($cookieValue)
     {
         $now = new \DateTime();
         $in6months = $now->add(new \DateInterval('P6M'));
         $cookieSetterListener = new CookieSetterListener(
             array('__gamp' =>  array(
-                'value' => $gampCookieValue,
+                'value' => $cookieValue,
                 'expire' => $in6months->getTimestamp())
             )
         );
@@ -131,4 +173,13 @@ class MeasurementProtocol
         );
     }
 
+    public static function gaid() {
+        return sprintf( '%04x%04x%04x.%04x%04x%04x',
+            // 32 bits for "time_low"
+            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+
+            // 48 bits for "node"
+            mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+        );
+    }
 }

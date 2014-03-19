@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="kairos_google_analytics_server_side.measurement_protocol.class">Kairos\GoogleAnalyticsServerSideBundle\Services\MeasurementProtocol</parameter>
+        <parameter key="kairos_google_analytics_server_side.measurement_protocol_tracker.class">Kairos\GoogleAnalyticsServerSideBundle\Services\MeasurementProtocolTracker</parameter>
         <parameter key="kairos_google_analytics_server_side.classic_tracker.class">Kairos\GoogleAnalyticsServerSideBundle\Services\ClassicTracker</parameter>
         <parameter key="kairos_google_analytics_server_side.js_tracker.class">Kairos\GoogleAnalyticsServerSideBundle\Services\JsTracker</parameter>
         <parameter key="kairos_google_analytics_server_side.account_id" />
@@ -21,13 +21,13 @@
         <!-- ensure backward compatibility -->
         <service id="google_analytics" alias="kairos_google_analytics_server_side.classic_tracker" />
 
-        <service id="kairos_google_analytics_server_side.measurement_protocol" class="%kairos_google_analytics_server_side.measurement_protocol.class%">
+        <service id="kairos_google_analytics_server_side.measurement_protocol_tracker" class="%kairos_google_analytics_server_side.measurement_protocol_tracker.class%">
             <argument type="service" id="service_container" />
             <argument>%kairos_google_analytics_server_side.account_id%</argument>
             <argument>%kairos_google_analytics_server_side.domain%</argument>
             <argument>%kairos_google_analytics_server_side.ssl%</argument>
         </service>
-        <service id="ga_mp_tracker" alias="kairos_google_analytics_server_side.measurement_protocol" />
+        <service id="ga_mp_tracker" alias="kairos_google_analytics_server_side.measurement_protocol_tracker" />
 
         <service id="kairos_google_analytics_server_side.js_tracker" class="%kairos_google_analytics_server_side.js_tracker.class%">
             <argument>%kairos_google_analytics_server_side.account_id%</argument>
