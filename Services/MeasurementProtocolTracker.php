@@ -53,11 +53,11 @@ class MeasurementProtocolTracker
      * @param string $domain
      * @param bool $ssl
      */
-    public function __construct(ContainerInterface $container, $trackingID, $domain, $ssl = false)
+    public function __construct(ContainerInterface $container, $trackingID, $domain, $ssl = false, $async = false)
     {
         $this->container    = $container;
         $this->request      = $this->container->get('request');
-        $this->client       = MeasurementProtocolClient::factory(array('ssl' => $ssl));
+        $this->client       = MeasurementProtocolClient::factory(array('ssl' => $ssl, 'async' => $async));
 
         $this->trackingID   = $trackingID;
         $this->domain       = $domain;

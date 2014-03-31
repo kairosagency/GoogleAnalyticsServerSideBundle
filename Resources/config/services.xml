@@ -9,6 +9,7 @@
         <parameter key="kairos_google_analytics_server_side.js_tracker.class">Kairos\GoogleAnalyticsServerSideBundle\Services\JsTracker</parameter>
         <parameter key="kairos_google_analytics_server_side.account_id" />
         <parameter key="kairos_google_analytics_server_side.domain" />
+        <parameter key="kairos_google_analytics_server_side.async" />
         <parameter key="kairos_google_analytics_server_side.ssl" />
         <parameter key="kairos_google_analytics_server_side.localhost" />
     </parameters>
@@ -27,6 +28,7 @@
             <argument>%kairos_google_analytics_server_side.account_id%</argument>
             <argument>%kairos_google_analytics_server_side.domain%</argument>
             <argument>%kairos_google_analytics_server_side.ssl%</argument>
+            <argument>%kairos_google_analytics_server_side.async%</argument>
         </service>
         <service id="ga_mp_tracker" alias="kairos_google_analytics_server_side.measurement_protocol_tracker" />
 
