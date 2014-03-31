@@ -119,6 +119,7 @@ class MeasurementProtocolTracker
 
 
         $default = array(
+            'tid' => $this->trackingID,
             'cid' => $this->clientId,
             'ua' => $this->request->server->get('HTTP_USER_AGENT'),
             'uip' => $this->request->getClientIp()
