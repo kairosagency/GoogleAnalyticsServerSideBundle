@@ -1,6 +1,9 @@
 Getting Started With Server-Side Google Analytics PHP Client
 ==================================
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kairosagency/GoogleAnalyticsServerSideBundle/badges/quality-score.png?s=ee8ccb653cbc357043870a02330d0d6367f3465c)](https://scrutinizer-ci.com/g/kairosagency/GoogleAnalyticsServerSideBundle/)
+[![Build Status](https://travis-ci.org/kairosagency/GoogleAnalyticsServerSideBundle.svg?branch=develop)](https://travis-ci.org/kairosagency/GoogleAnalyticsServerSideBundle)
+
 ## Important
 
 This bundle has been updated to support universal analytics.
