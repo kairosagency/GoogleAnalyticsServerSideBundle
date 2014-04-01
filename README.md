@@ -19,7 +19,7 @@ This bundle made originally use of the great project from UnitedPrototype : http
 
 ## Requirements
 
-Requires PHP 5.3 as namespaces and closures are used. Has no other dependencies and can be used independantly from any framework or whatsoever environment.
+Requires PHP 5.3 as namespaces and closures are used, Symfony 2 framework
 
 ## Installation :
 
