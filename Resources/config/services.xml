@@ -12,6 +12,10 @@
         <parameter key="kairos_google_analytics_server_side.async" />
         <parameter key="kairos_google_analytics_server_side.ssl" />
         <parameter key="kairos_google_analytics_server_side.localhost" />
+
+        <parameter key="kairos_google_analytics_server_side.measurement_protocol_tracker.loggable_class">Kairos\GoogleAnalyticsServerSideBundle\Services\MeasurementProtocolLoggableTracker</parameter>
+        <parameter key="kairos_google_analytics_server_side.logger.class">Kairos\GoogleAnalyticsServerSideBundle\Logger\TrackerLogger</parameter>
+        <parameter key="kairos_google_analytics_server_side.data_collector.class">Kairos\GoogleAnalyticsServerSideBundle\DataCollector\TrackerDataCollector</parameter>
     </parameters>
 
     <services>
@@ -39,6 +43,19 @@
             <argument>%kairos_google_analytics_server_side.localhost%</argument>
         </service>
         <service id="ga_js_tracker" alias="kairos_google_analytics_server_side.js_tracker" />
+
+
+        <!-- Logger -->
+        <service id="kairos_google_analytics_server_side.logger" class="%kairos_google_analytics_server_side.logger.class%">
+            <tag name="monolog.logger" channel="kairos_google_analytics_serverside" />
+            <argument type="service" id="logger" on-invalid="null" />
+        </service>
+
+        <!-- Data collector -->
+        <service id="kairos_google_analytics_server_side.data_collector" class="%kairos_google_analytics_server_side.data_collector.class%" public="false">
+            <tag name="data_collector" template="KairosGoogleAnalyticsServerSideBundle:Collector:gamptracker" id="geocoder" />
+            <argument type="service" id="kairos_google_analytics_server_side.logger" />
+        </service>
 
     </services>
 </container>
