@@ -24,11 +24,11 @@ class LoggablePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ga_mp_tracker')) {
+        if (!$container->hasDefinition('kairos_google_analytics_server_side.measurement_protocol_tracker')) {
             return;
         }
 
-        $definition = $container->getDefinition('ga_mp_tracker');
+        $definition = $container->getDefinition('kairos_google_analytics_server_side.measurement_protocol_tracker');
         $definition->setClass($container->getParameter('kairos_google_analytics_server_side.measurement_protocol_tracker.loggable_class'));
         $definition->addMethodCall('setLogger', array(new Reference('kairos_google_analytics_server_side.logger')));
     }

@@ -54,7 +54,7 @@
 
         <!-- Data collector -->
         <service id="kairos_google_analytics_server_side.data_collector" class="%kairos_google_analytics_server_side.data_collector.class%" public="false">
-            <tag name="data_collector" template="KairosGoogleAnalyticsServerSideBundle:Collector:gamptracker" id="geocoder" />
+            <tag name="data_collector" template="KairosGoogleAnalyticsServerSideBundle:Collector:gamptracker" id="gamptracker" />
             <argument type="service" id="kairos_google_analytics_server_side.logger" />
         </service>
 

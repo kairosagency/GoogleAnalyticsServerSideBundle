@@ -1,9 +1,6 @@
 <?php
 
 /**
- * This file is part of the BazingaGeocoderBundle package.
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
  *
  * @license    MIT License
  */
@@ -36,15 +33,14 @@ class TrackerLogger
     }
 
     /**
-     * @param string                      $value         value to geocode
-     * @param float                       $duration      geocoding duration
-     * @param string                      $providerClass Geocoder provider class name
-     * @param \SplObjectStorage|Geocoded  $results
+     * @param string                      $value         hit to send
+     * @param float                       $duration      gapi call duration
+     * @param \SplObjectStorage  $results
      */
     public function logRequest($value, $duration, $results)
     {
         if (null !== $this->logger) {
-            $this->logger->info(sprintf("%s %0.2f ms (%s)", $value, $duration));
+            $this->logger->info(sprintf("%s %0.2f ms", $value, $duration));
         }
 
         if ($results instanceof \SplObjectStorage) {
@@ -52,13 +48,13 @@ class TrackerLogger
                 $data[] = $result->toArray();
             }
         } else {
-            $data = $results->toArray();
+            $data = $results->getRawHeaders();
         }
 
         $this->requests[] = array(
             'value'         => $value,
             'duration'      => $duration,
-            'result'        => json_encode($data),
+            'result'        => $data,
         );
     }
 

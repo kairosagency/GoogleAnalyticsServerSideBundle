@@ -15,13 +15,13 @@ use Symfony\Component\HttpFoundation\Response;
 class TrackerDataCollector extends DataCollector
 {
     /**
-     * @var GeocoderLogger
+     * @var TrackerLogger
      */
     protected $logger;
 
     /**
      *
-     * @param GeocoderLogger $logger
+     * @param TrackerLogger $logger
      */
     public function __construct(TrackerLogger $logger)
     {
@@ -78,6 +78,6 @@ class TrackerDataCollector extends DataCollector
      */
     public function getName()
     {
-        return 'tracker';
+        return 'gamptracker';
     }
 }
