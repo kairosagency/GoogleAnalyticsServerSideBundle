@@ -13,6 +13,7 @@
         <parameter key="kairos_google_analytics_server_side.ssl" />
         <parameter key="kairos_google_analytics_server_side.localhost" />
 
+        <!-- logger parameters -->
         <parameter key="kairos_google_analytics_server_side.measurement_protocol_tracker.loggable_class">Kairos\GoogleAnalyticsServerSideBundle\Services\MeasurementProtocolLoggableTracker</parameter>
         <parameter key="kairos_google_analytics_server_side.logger.class">Kairos\GoogleAnalyticsServerSideBundle\Logger\TrackerLogger</parameter>
         <parameter key="kairos_google_analytics_server_side.data_collector.class">Kairos\GoogleAnalyticsServerSideBundle\DataCollector\TrackerDataCollector</parameter>
