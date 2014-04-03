@@ -45,6 +45,11 @@ class MeasurementProtocolTracker
     /**
      * @var bool
      */
+    protected $updateCookie;
+
+    /**
+     * @var bool
+     */
     protected $hasCookie;
 
     /**
@@ -68,13 +73,16 @@ class MeasurementProtocolTracker
         $this->trackingID   = $trackingID;
         $this->domain       = $domain;
         $this->clientId     = $this->setClientId();
-        $this->hasCookie    = true;
     }
 
     /**
      * @return string
      */
-    private function setClientId() {
+    private function setClientId()
+    {
+        $this->updateCookie = false;
+        $this->hasCookie    = true;
+
         $gamp = $this->request->cookies->get('__gamp');
         $ga = $this->request->cookies->get('_ga');
 
@@ -85,13 +93,14 @@ class MeasurementProtocolTracker
 
             // we force our cookie to sync with ga cookie client Id
             if($gamp != $gaClientId) {
-                $this->hasCookie = false;
+                $this->updateCookie = true;
             }
             return $gaClientId;
         }
 
         //if gajs is not running and there is no client id we generate a new one
         if(is_null($gamp)) {
+            $this->updateCookie = true;
             $this->hasCookie = false;
             return self::gaid();
         }
@@ -102,27 +111,25 @@ class MeasurementProtocolTracker
     /**
      * @return string
      */
-    public function getClientId() {
+    public function getClientId()
+    {
         return $this->clientId;
     }
-
 
     /**
      * @return bool
      */
-    public function hasCookie() {
+    public function hasCookie()
+    {
         return $this->hasCookie;
     }
 
 
-
-
-    public function track($hitType, $args) {
-
-        if(!$this->hasCookie) {
+    public function track($hitType, $args)
+    {
+        if($this->updateCookie) {
             $this->setGampCookie($this->clientId);
         }
-
 
         $default = array(
             'tid' => $this->trackingID,
@@ -140,7 +147,7 @@ class MeasurementProtocolTracker
         if(is_callable(array($this->client, $hitType), true)) {
             if($this->async) {
                 register_shutdown_function(array($this->client, $hitType), array_merge($default, $args));
-                return '[async http request] No results';
+                return 'Asynchronous google measurement protocol http request';
             }
             else {
                 $response = call_user_func(array($this->client, $hitType), array_merge($default, $args));
@@ -173,12 +180,14 @@ class MeasurementProtocolTracker
      * @param $ga
      * @return string
      */
-    private static function parseGa($ga) {
+    private static function parseGa($ga)
+    {
         return implode('.', array_slice(explode('.', $ga), -2, 2));
     }
 
 
-    public static function gaid() {
+    public static function gaid()
+    {
         return sprintf( '%04x%04x%04x.%04x%04x%04x',
             // 32 bits for "time_low"
             mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),

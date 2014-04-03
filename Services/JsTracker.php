@@ -52,10 +52,10 @@ class JsTracker
         $args = array();
 
         if($tid) {
-            $args['tid'] = $tid;
+            $_tid = $tid;
         }
         else {
-            $args['tid'] = $this->trackingID;
+            $_tid = $this->trackingID;
         }
 
         if($domain) {
@@ -83,7 +83,7 @@ class JsTracker
             . "m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)"
             . "})(window,document,'script','//www.google-analytics.com/analytics.js','ga');";
 
-        $gascript .= "ga('create', ". json_encode($args) ."); </script>";
+        $gascript .= chr(13).chr(13)."ga('create', '" . $_tid . "', ". json_encode($args) ."); </script>";
 
 
 
