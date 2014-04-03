@@ -6,6 +6,8 @@ tools:
     php_code_coverage: true
     php_analyzer: true
     php_code_sniffer: true
+    external_code_coverage:
+        timeout: 600 # Timeout in seconds.
 
 before_commands:
     - "composer install --prefer-source"
