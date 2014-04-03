@@ -48,7 +48,7 @@ class TrackerLogger
                 $data[] = $result->toArray();
             }
         } else {
-            $data = $results->getRawHeaders();
+            $data = $results;
         }
 
         $this->requests[] = array(

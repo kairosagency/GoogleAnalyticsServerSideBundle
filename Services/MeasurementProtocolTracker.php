@@ -48,6 +48,11 @@ class MeasurementProtocolTracker
     protected $hasCookie;
 
     /**
+     * @var bool
+     */
+    protected $async;
+
+    /**
      * @param ContainerInterface $container
      * @param string $trackingID
      * @param string $domain
@@ -57,7 +62,8 @@ class MeasurementProtocolTracker
     {
         $this->container    = $container;
         $this->request      = $this->container->get('request');
-        $this->client       = MeasurementProtocolClient::factory(array('ssl' => $ssl, 'async' => $async));
+        $this->async        = $async;
+        $this->client       = MeasurementProtocolClient::factory(array('ssl' => $ssl));
 
         $this->trackingID   = $trackingID;
         $this->domain       = $domain;
@@ -131,8 +137,16 @@ class MeasurementProtocolTracker
         }
 
         //check if the function is callable
-        if(is_callable(array($this->client, $hitType), true))
-            return call_user_func(array($this->client, $hitType), array_merge($default, $args));
+        if(is_callable(array($this->client, $hitType), true)) {
+            if($this->async) {
+                register_shutdown_function(array($this->client, $hitType), array_merge($default, $args));
+                return '[async http request] No results';
+            }
+            else {
+                $response = call_user_func(array($this->client, $hitType), array_merge($default, $args));
+                return $response->getRawHeaders();
+            }
+        }
         else
             return null;
     }
