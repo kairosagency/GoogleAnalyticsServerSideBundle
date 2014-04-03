@@ -6,9 +6,6 @@ use Kairos\GoogleAnalyticsServerSideBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */

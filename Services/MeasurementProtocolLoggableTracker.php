@@ -7,14 +7,14 @@ class MeasurementProtocolLoggableTracker extends MeasurementProtocolTracker
 {
 
     /**
-     * @var  \Kairos\GoogleAnalyticsServerSideBundle\Logger\TrackerLogger
+     * @var  TrackerLogger
      */
     protected $logger;
 
 
     /**
      *
-     * @param MeasurementProtocolTracker $logger
+     * @param TrackerLogger $logger
      */
     public function setLogger(TrackerLogger $logger = null)
     {

@@ -15,9 +15,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Kairos\GoogleAnalyticsServerSideBundle\DependencyInjection\KairosGoogleAnalyticsServerSideExtension;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 
 class MeasurementProtocolTrackerTest extends \PHPUnit_Framework_TestCase

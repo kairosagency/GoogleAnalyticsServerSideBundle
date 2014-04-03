@@ -2,7 +2,7 @@
 namespace Kairos\GoogleAnalyticsServerSideBundle\Services;
 
 
-use Kairos\GoogleAnalyticsServerSideBundle\Services\MeasurementProtocol;
+use Kairos\GoogleAnalyticsServerSideBundle\Services\MeasurementProtocolTracker;
 
 class JsTracker
 {
@@ -22,7 +22,7 @@ class JsTracker
     protected $localhost;
 
     /**
-     * @var \Kairos\GoogleAnalyticsServerSideBundle\Services\MeasurementProtocolTracker
+     * @var MeasurementProtocolTracker
      */
     protected $measurementProtocolTracker;
 

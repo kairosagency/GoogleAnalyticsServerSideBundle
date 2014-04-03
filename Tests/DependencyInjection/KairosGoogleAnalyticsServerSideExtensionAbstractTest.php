@@ -2,11 +2,8 @@
 
 namespace Kairos\GoogleAnalyticsServerSideBundle\Tests\DependencyInjection;
 
-use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\Config\FileLocator;
 
 use Kairos\GoogleAnalyticsServerSideBundle\DependencyInjection\KairosGoogleAnalyticsServerSideExtension;
 
@@ -27,7 +24,13 @@ Abstract class KairosGoogleAnalyticsServerSideExtensionAbstractTest extends \PHP
         $this->container->registerExtension($this->extension);
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param string $resource
+     * @return mixed
+     */
     abstract protected function loadConfiguration(ContainerBuilder $container, $resource);
+
 
     public function testConfiguration()
     {

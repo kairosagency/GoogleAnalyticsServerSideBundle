@@ -3,15 +3,13 @@ namespace Kairos\GoogleAnalyticsServerSideBundle\Services;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
-
 use Kairos\GoogleAnalyticsServerSideBundle\Listener\CookieSetterListener;
-
 use Krizon\Google\Analytics\MeasurementProtocol\MeasurementProtocolClient;
 
 class MeasurementProtocolTracker
 {
     /**
-     * @var \Symfony\Component\HttpFoundation\Request
+     * @var Request
      */
     protected $request;
 
@@ -167,6 +165,9 @@ class MeasurementProtocolTracker
     }
 
 
+    /**
+     * @param string $cookieValue
+     */
     public function setGampCookie($cookieValue)
     {
         $now = new \DateTime();
