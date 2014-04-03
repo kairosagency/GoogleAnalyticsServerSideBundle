@@ -124,6 +124,14 @@ class MeasurementProtocolTracker
         return $this->hasCookie;
     }
 
+    /**
+     * @return bool
+     */
+    public function shouldUpdateCookie()
+    {
+        return $this->updateCookie;
+    }
+
 
     public function track($hitType, $args)
     {

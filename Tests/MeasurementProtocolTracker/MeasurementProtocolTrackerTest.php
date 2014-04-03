@@ -109,19 +109,23 @@ class MeasurementProtocolTrackerTest extends \PHPUnit_Framework_TestCase
         return array(
             array(
                 array('__gamp' => 'f48e37b10a8c.1d809940858a', '_ga' => 'GA1.1.f48e37b10a8c.1d809940858a'),
-                'f48e37b10a8c.1d809940858a'
+                'f48e37b10a8c.1d809940858a',
+                false,
             ),
             array(
                 array('__gamp' => '111111111111.1d809940858a', '_ga' => 'GA1.1.f48e37b10a8c.1d809940858a'),
-                'f48e37b10a8c.1d809940858a'
+                'f48e37b10a8c.1d809940858a',
+                true,
             ),
             array(
                 array('__gamp' => 'f48e37b10a8c.1d809940858a'),
-                'f48e37b10a8c.1d809940858a'
+                'f48e37b10a8c.1d809940858a',
+                false,
             ),
             array(
                 array('_ga' => 'GA1.1.f48e37b10a8c.1d809940858a'),
-                'f48e37b10a8c.1d809940858a'
+                'f48e37b10a8c.1d809940858a',
+                true,
             )
         );
     }
@@ -130,11 +134,22 @@ class MeasurementProtocolTrackerTest extends \PHPUnit_Framework_TestCase
      * test getClientId
      * @dataProvider getCookiesProvider
      */
-    public function testGetClientIdWithCookies($cookies, $cid)
+    public function testGetClientIdWithCookies($cookies, $cid, $shouldUpdateCookie)
     {
         $this->buildContainerWithRequest($this->getCustomRequest($cookies));
         $this->assertNotNull($this->mptracker->getClientId());
         $this->assertEquals($cid, $this->mptracker->getClientId());
+    }
+
+
+    /**
+     * test getClientId
+     * @dataProvider getCookiesProvider
+     */
+    public function testUpdateCookie($cookies, $cid, $shouldUpdateCookie)
+    {
+        $this->buildContainerWithRequest($this->getCustomRequest($cookies));
+        $this->assertEquals($shouldUpdateCookie, $this->mptracker->shouldUpdateCookie());
     }
 
 
