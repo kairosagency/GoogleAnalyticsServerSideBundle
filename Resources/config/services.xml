@@ -12,6 +12,8 @@
         <parameter key="kairos_google_analytics_server_side.async" />
         <parameter key="kairos_google_analytics_server_side.ssl" />
         <parameter key="kairos_google_analytics_server_side.localhost" />
+        <parameter key="kairos_google_analytics_server_side.timeout" />
+        <parameter key="kairos_google_analytics_server_side.connect_timeout" />
 
         <!-- logger parameters -->
         <parameter key="kairos_google_analytics_server_side.measurement_protocol_tracker.loggable_class">Kairos\GoogleAnalyticsServerSideBundle\Services\MeasurementProtocolLoggableTracker</parameter>
@@ -34,6 +36,8 @@
             <argument>%kairos_google_analytics_server_side.domain%</argument>
             <argument>%kairos_google_analytics_server_side.ssl%</argument>
             <argument>%kairos_google_analytics_server_side.async%</argument>
+            <argument>%kairos_google_analytics_server_side.timeout%</argument>
+            <argument>%kairos_google_analytics_server_side.connect_timeout%</argument>
         </service>
         <service id="ga_mp_tracker" alias="kairos_google_analytics_server_side.measurement_protocol_tracker" />
 

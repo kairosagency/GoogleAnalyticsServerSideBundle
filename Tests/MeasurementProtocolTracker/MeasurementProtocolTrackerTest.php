@@ -15,6 +15,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Kairos\GoogleAnalyticsServerSideBundle\DependencyInjection\KairosGoogleAnalyticsServerSideExtension;
+use Symfony\Component\DependencyInjection\Scope;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -34,6 +35,10 @@ class MeasurementProtocolTrackerTest extends \PHPUnit_Framework_TestCase
     {
         $this->container = new ContainerBuilder();
         $this->container->registerExtension($this->extension);
+
+        // makes isScopeActive true
+        $this->container->addScope(new Scope('request'));
+        $this->container->enterScope('request');
 
         $loader = new YamlFileLoader($this->container, new FileLocator(__DIR__.'/../Fixtures/'));
         $loader->load('config.yml');

@@ -30,5 +30,7 @@ class KairosGoogleAnalyticsServerSideExtension extends Extension
         $container->setParameter('kairos_google_analytics_server_side.ssl', $config['ssl']);
         $container->setParameter('kairos_google_analytics_server_side.async', $config['async']);
         $container->setParameter('kairos_google_analytics_server_side.localhost', $config['localhost']);
+        $container->setParameter('kairos_google_analytics_server_side.timeout', $config['timeout']);
+        $container->setParameter('kairos_google_analytics_server_side.connect_timeout', $config['connect_timeout']);
     }
 }

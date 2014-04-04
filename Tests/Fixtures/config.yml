@@ -4,3 +4,5 @@ kairos_google_analytics_server_side:
     async:        true
     ssl:          true
     localhost:    true
+    timeout:      5
+    connect_timeout: 1

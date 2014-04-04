@@ -51,6 +51,14 @@ class Configuration implements ConfigurationInterface
                     ->info('if you develop on localhost')
                     ->example('true or false')
                 ->end()
+                ->scalarNode('timeout')
+                    ->defaultValue(10)
+                    ->info('total timeout')
+                ->end()
+                ->scalarNode('connect_timeout')
+                    ->defaultValue(2)
+                    ->info('connection timeout')
+                ->end()
             ->end();
 
         return $treeBuilder;

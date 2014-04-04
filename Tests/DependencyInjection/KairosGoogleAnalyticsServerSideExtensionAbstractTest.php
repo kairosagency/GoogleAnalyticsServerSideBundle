@@ -41,6 +41,8 @@ Abstract class KairosGoogleAnalyticsServerSideExtensionAbstractTest extends \PHP
         $this->assertTrue($this->container->getParameter('kairos_google_analytics_server_side.async'));
         $this->assertTrue($this->container->getParameter('kairos_google_analytics_server_side.ssl'));
         $this->assertTrue($this->container->getParameter('kairos_google_analytics_server_side.localhost'));
+        $this->assertEquals(5, $this->container->getParameter('kairos_google_analytics_server_side.timeout'));
+        $this->assertEquals(1, $this->container->getParameter('kairos_google_analytics_server_side.connect_timeout'));
     }
 
     /**
