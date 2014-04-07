@@ -163,16 +163,32 @@ class MeasurementProtocolTracker
         //check if the function is callable
         if(is_callable(array($this->client, $hitType), true)) {
             if($this->async) {
-                register_shutdown_function(array($this->client, $hitType), array_merge($default, $args));
+                register_shutdown_function(array($this, 'trackAndCatch'), array_merge($default, $args));
                 return 'Asynchronous google measurement protocol http request';
             }
             else {
-                $response = call_user_func(array($this->client, $hitType), array_merge($default, $args));
-                return $response->getRawHeaders();
+                return $this->trackAndCatch( $hitType, array_merge($default, $args));
             }
         }
         else
             return null;
+    }
+
+    /**
+     * we catch all errors, errors should not make the whole app fails
+     * (eg : timeout, 403 or 404 ...)
+     *
+     * @param $hitType
+     * @param $args
+     * @return mixed|string
+     */
+    private function trackAndCatch($hitType, $args)
+    {
+        try {
+            return call_user_func(array($this->client, $hitType), $args);
+        } catch(\Exception $e) {
+            return '[Guzzle error] ' . $e->getMessage();
+        }
     }
 
 
