@@ -164,7 +164,8 @@ class MeasurementProtocolTracker
         //check if the function is callable
         if(is_callable(array($this->client, $hitType), true)) {
             if($this->async) {
-                register_shutdown_function(array($this, 'trackAndCatch'), array_merge($default, $args));
+                // can't manage to catch errors with "register_shutdown_function"
+                register_shutdown_function(array($this->client, $hitType), array_merge($default, $args));
                 return 'Asynchronous google measurement protocol http request';
             }
             else {
@@ -176,7 +177,7 @@ class MeasurementProtocolTracker
     }
 
     /**
-     * we catch all errors, errors should not make the whole app fails
+     * we catch curl exceptions, curl exceptions should not make the whole app fails
      * (eg : timeout, 403 or 404 ...)
      *
      * @param $hitType
