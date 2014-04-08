@@ -20,11 +20,6 @@ class MeasurementProtocolTracker
     protected $container;
 
     /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
      * @var string
      */
     protected $trackingID;
@@ -67,14 +62,13 @@ class MeasurementProtocolTracker
      * @param string $domain
      * @param bool $ssl
      */
-    public function __construct(ContainerInterface $container, LoggerInterface $logger, $trackingID, $domain, $ssl = false, $async = false, $timeout = 10, $connect_timeout = 2)
+    public function __construct(ContainerInterface $container, $trackingID, $domain, $ssl = false, $async = false, $timeout = 10, $connect_timeout = 2)
     {
         $this->async        = $async;
         $this->trackingID   = $trackingID;
         $this->domain       = $domain;
 
         $this->container    = $container;
-        $this->logger       = $logger;
         $this->client       = MeasurementProtocolClient::factory(
             array(
                 'ssl' => $ssl,
