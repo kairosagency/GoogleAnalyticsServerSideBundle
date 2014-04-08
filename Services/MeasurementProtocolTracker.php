@@ -186,8 +186,10 @@ class MeasurementProtocolTracker
     {
         try {
             return call_user_func(array($this->client, $hitType), $args);
-        } catch(\Exception $e) {
-            return '[Guzzle error] ' . $e->getMessage();
+        } catch(\Guzzle\Http\Exception\CurlException $e) {
+            $error = '[Guzzle error] ' . $e->getMessage();
+            $this->container->get('logger')->error($error);
+            return $error;
         }
     }
 

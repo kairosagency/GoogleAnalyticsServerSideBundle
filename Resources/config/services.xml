@@ -38,6 +38,7 @@
             <argument>%kairos_google_analytics_server_side.async%</argument>
             <argument>%kairos_google_analytics_server_side.timeout%</argument>
             <argument>%kairos_google_analytics_server_side.connect_timeout%</argument>
+            <tag name="monolog.logger" channel="kairos_google_analytics_serverside" />
         </service>
         <service id="ga_mp_tracker" alias="kairos_google_analytics_server_side.measurement_protocol_tracker" />
 
