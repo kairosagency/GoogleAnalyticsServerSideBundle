@@ -195,7 +195,7 @@ class MeasurementProtocolTracker
             return call_user_func(array($this->client, $hitType), $args);
         } catch(\Guzzle\Http\Exception\CurlException $e) {
             $error = '[Guzzle error] ' . $e->getMessage();
-            $this->logger->error($error);
+            $this->container->get('kairos_google_analytics_server_side.logger')->error($error);
             return $error;
         }
     }
