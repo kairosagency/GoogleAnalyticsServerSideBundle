@@ -7,7 +7,9 @@
 
 namespace Kairos\GoogleAnalyticsServerSideBundle\Logger;
 
+use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerTrait;
 
 /**
  * @author Michal Dabrowski <dabrowski@brillante.pl>
@@ -66,5 +68,23 @@ class TrackerLogger
     public function getRequests()
     {
         return $this->requests;
+    }
+
+    /**
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public function error($message, array $context = array()) {
+        $this->logger->error($message, $context);
+    }
+
+    /**
+     * @param string $message
+     * @param array $context
+     * @return null
+     */
+    public function info($message, array $context = array()) {
+        $this->logger->info($message, $context);
     }
 }
