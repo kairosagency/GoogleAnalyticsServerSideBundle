@@ -32,6 +32,7 @@
 
         <service id="kairos_google_analytics_server_side.measurement_protocol_tracker" class="%kairos_google_analytics_server_side.measurement_protocol_tracker.class%">
             <argument type="service" id="service_container" />
+            <argument type="service" id="logger" />
             <argument>%kairos_google_analytics_server_side.account_id%</argument>
             <argument>%kairos_google_analytics_server_side.domain%</argument>
             <argument>%kairos_google_analytics_server_side.ssl%</argument>

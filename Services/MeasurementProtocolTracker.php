@@ -1,6 +1,7 @@
 <?php
 namespace Kairos\GoogleAnalyticsServerSideBundle\Services;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Kairos\GoogleAnalyticsServerSideBundle\Listener\CookieSetterListener;
@@ -17,6 +18,11 @@ class MeasurementProtocolTracker
      * @var ContainerInterface
      */
     protected $container;
+
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
 
     /**
      * @var string
@@ -61,13 +67,14 @@ class MeasurementProtocolTracker
      * @param string $domain
      * @param bool $ssl
      */
-    public function __construct(ContainerInterface $container, $trackingID, $domain, $ssl = false, $async = false, $timeout = 10, $connect_timeout = 2)
+    public function __construct(ContainerInterface $container, LoggerInterface $logger, $trackingID, $domain, $ssl = false, $async = false, $timeout = 10, $connect_timeout = 2)
     {
         $this->async        = $async;
         $this->trackingID   = $trackingID;
         $this->domain       = $domain;
 
         $this->container    = $container;
+        $this->logger       = $logger;
         $this->client       = MeasurementProtocolClient::factory(
             array(
                 'ssl' => $ssl,
@@ -188,7 +195,7 @@ class MeasurementProtocolTracker
             return call_user_func(array($this->client, $hitType), $args);
         } catch(\Guzzle\Http\Exception\CurlException $e) {
             $error = '[Guzzle error] ' . $e->getMessage();
-            $this->container->get('logger')->error($error);
+            $this->logger->error($error);
             return $error;
         }
     }
