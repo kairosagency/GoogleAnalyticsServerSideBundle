@@ -21,7 +21,6 @@ class MeasurementProtocolLoggableTracker extends MeasurementProtocolTracker
         $this->logger = $logger;
     }
 
-
     /**
      * {@inheritdoc}
      */
