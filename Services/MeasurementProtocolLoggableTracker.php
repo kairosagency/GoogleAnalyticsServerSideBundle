@@ -36,7 +36,7 @@ class MeasurementProtocolLoggableTracker extends MeasurementProtocolTracker
         $duration  = (microtime(true) - $startTime) * 1000;
 
         $this->logger->logRequest(
-            sprintf("[google analytics] sending hit %s to account %s on domain %s", array($hitType, $args['tid'])),
+            sprintf("[google analytics] sending hit %s to account %s", $hitType, $args),
             $duration,
             $results
         );
