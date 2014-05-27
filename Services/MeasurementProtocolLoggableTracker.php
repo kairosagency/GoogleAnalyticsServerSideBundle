@@ -29,13 +29,17 @@ class MeasurementProtocolLoggableTracker extends MeasurementProtocolTracker
         if (null === $this->logger) {
             return parent::track($hitType, $args);
         }
+        /*ob_start();
+        var_dump($args);
+        $dump = ob_end_clean();*/
+
 
         $startTime = microtime(true);
         $results   = parent::track($hitType, $args);
         $duration  = (microtime(true) - $startTime) * 1000;
 
         $this->logger->logRequest(
-            sprintf("[google analytics] sending hit %s to account %s with cid %s", $hitType, $this->trackingID, $this->clientId),
+            sprintf("[google analytics] sending hit %s to account %s with cid %s and params: %s", $hitType, $this->trackingID, $this->clientId, json_encode($args)),
             $duration,
             $results
         );
