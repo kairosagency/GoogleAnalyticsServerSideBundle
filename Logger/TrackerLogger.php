@@ -45,13 +45,11 @@ class TrackerLogger
             $this->logger->info(sprintf("%s %0.2f ms", $value, $duration));
         }
 
-        if ($results instanceof \SplObjectStorage) {
-            foreach ($results as $result) {
-                $data[] = $result->toArray();
-            }
-        } else {
-            $data = $results;
-        }
+        if ($results instanceof \Guzzle\Http\Message\Response) {
+            $data = $results->getRawHeaders();
+        }
+        else
+            $data = $results;
 
         $this->requests[] = array(
             'value'         => $value,
