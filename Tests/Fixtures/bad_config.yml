@@ -1,0 +1,5 @@
+kairos_google_analytics_server_side:
+    domain:       symfony.org
+    async:        false
+    ssl:          false
+    localhost:    true

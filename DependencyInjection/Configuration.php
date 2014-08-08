@@ -1,6 +1,6 @@
 <?php
 
-namespace GoogleAnalyticsServerSide\DependencyInjection;
+namespace Kairos\GoogleAnalyticsServerSideBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,11 +18,48 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('google_analytics');
+        $rootNode = $treeBuilder->root('kairos_google_analytics_server_side');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+
+        $rootNode
+            ->children()
+                ->scalarNode('account_id')
+                    ->isRequired()->cannotBeEmpty()
+                    ->info('your google account id')
+                    ->example('UA-XXXXXXXX-XX')
+                ->end()
+                ->scalarNode('domain')
+                    ->defaultNull()
+                    ->info('domain to track')
+                    ->example('google.com')
+                ->end()
+                ->scalarNode('async')
+                    ->defaultFalse()
+                    ->info('use aynchronous guzzle requests')
+                    ->example('true or false')
+                ->end()
+                ->scalarNode('ssl')
+                    ->defaultFalse()
+                    ->info('use ssl')
+                    ->example('true or false')
+                ->end()
+                ->scalarNode('localhost')
+                    ->defaultFalse()
+                    ->info('if you develop on localhost')
+                    ->example('true or false')
+                ->end()
+                ->scalarNode('timeout')
+                    ->defaultValue(10)
+                    ->info('total timeout')
+                ->end()
+                ->scalarNode('connect_timeout')
+                    ->defaultValue(2)
+                    ->info('connection timeout')
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }

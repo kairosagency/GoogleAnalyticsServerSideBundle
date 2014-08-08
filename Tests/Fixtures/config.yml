@@ -1,0 +1,8 @@
+kairos_google_analytics_server_side:
+    account_id:   UA-11111111-1
+    domain:       symfony.org
+    async:        true
+    ssl:          true
+    localhost:    true
+    timeout:      5
+    connect_timeout: 1
