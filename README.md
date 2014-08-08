@@ -2,9 +2,14 @@ Getting Started With Server-Side Google Analytics PHP Client
 ==================================
 
 ## Important  
+
+*This version is deprecated, we have tagged it version 1.0.0 so use this in your composer.json if you are still using this version*  
+
+You should rather use version 2.0.0 which is the new starting point of the library.
+
 This package is directly based on this project from UnitedPrototype : http://code.google.com/p/php-ga/ 
 
-This package is aimed at using php-ga in symfony 2 as a vendor and a service.
+This package is aimed at using php-ga in symfony 2 as a vendor and a service
 
 
 ## Summary :
