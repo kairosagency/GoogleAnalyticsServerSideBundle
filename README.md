@@ -62,10 +62,15 @@ Composer will install the bundle to your project's vendor/kairos directory.
     kairos_google_analytics_server_side:
         account_id:  UA-XXXXXXXX-XX
         domain:     your.domain
-        ssl: false
+        async: true|false       // use register shutdown function to send "async" hits to google analytics
+        ssl: true|false
+        localhost: true|false   // set to true if you want js code to push analytics on localhost
+        timeout: 10             // value in seconds if you don't want your php script to block in case ga dos not respond
+        connect_timeout: 2      // same thing as above
+
 ```
 
-**If you want to use also js tracking**
+**To enable js tracking**
 
 ``` yaml
     twig:
@@ -75,9 +80,9 @@ Composer will install the bundle to your project's vendor/kairos directory.
 
 ## How To use :
 
-### With the new universal analytics :
+### Universal analytics :
 
-**Super Bonus !**
+**Super mega cool tip !**
 You can use both serverside and client side ! The session will be synched between your serverside and client side code so no doubles
 
 #### Serverside usage :
@@ -121,11 +126,13 @@ You can override trackingId and Domain by calling the function with these parame
     {{ gajs.getGAjs('trackingID','domain')|raw }}
 ```
 
-Don't forget the raw if you don't want the tag to be escaped. Your ga.js session will be automatically synched with your server side session (client id is shared in the cookies).
+Don't forget the raw if you don't want the tag to be escaped bu twig. Your ga.js session will be automatically synched with your server side session (client id is shared in the cookies).
 
 
 
 #### With an old google analytics account :
+
+**Warning** This is deprecated and not supported any more
 
 ``` php
 
