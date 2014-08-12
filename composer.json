@@ -2,7 +2,7 @@
     "name": "kairos/googleanalyticsserversidebundle",
     "type": "library",
     "license": "LGPL-3.0",
-    "description": "Push google analytics hits from the server",
+    "description": "Symfony 2 bundle, push your google analytics hits from the server",
     "keywords": ["php-ga","google-analytics", "measurement protocol", "server-side-analytics"],
     "homepage": "https://github.com/kairosagency/GoogleAnalyticsServerSideBundle.git",
     "authors": [
