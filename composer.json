@@ -19,8 +19,8 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "symfony/framework-bundle": ">=2.1,<=2.4",
-        "kairos/googleanalyticsserverside": "dev-master"
+        "symfony/framework-bundle": "~2.1",
+        "kairos/googleanalyticsserverside": "~1.0.0"
     },
     "autoload": {
         "psr-0": { "GoogleAnalyticsServerSide": "" }
