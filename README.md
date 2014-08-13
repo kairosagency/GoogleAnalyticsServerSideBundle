@@ -6,7 +6,18 @@ Getting Started With Server-Side Google Analytics PHP Client
 
 ## Important
 
-This bundle has been updated to support universal analytics.
+Your bundle might not work any more after major changes to the master branch.
+To solve that problem, please update your composer.json and set your bundle version to ~1.0.0 :
+
+``` js
+    {
+        "require": {
+            "kairos/googleanalyticsserversidebundle": "~1.0.0"
+        }
+    }
+```
+
+This bundle has been updated to support universal analytics which is a far better solution than the php-ga library.
 
 
 ## Summary :
@@ -15,6 +26,7 @@ Google Analytics Server Side Bundle is aimed at sending google analytics hits fr
 This can be very usefull for an app, or in case google analytics is blocked.
 
 This bundle made originally use of the great project from UnitedPrototype : http://code.google.com/p/php-ga/
+But now use the new google universal analytics which is more efficient and robust.
 
 
 ## Requirements
@@ -28,7 +40,7 @@ Requires PHP 5.3 as namespaces and closures are used, Symfony 2 framework
 ``` js
     {
         "require": {
-            "kairos/googleanalyticsserversidebundle": "dev-master"
+            "kairos/googleanalyticsserversidebundle": "~2.0.0"
         }
     }
 ```
