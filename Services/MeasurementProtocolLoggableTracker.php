@@ -29,10 +29,6 @@ class MeasurementProtocolLoggableTracker extends MeasurementProtocolTracker
         if (null === $this->logger) {
             return parent::track($hitType, $args);
         }
-        /*ob_start();
-        var_dump($args);
-        $dump = ob_end_clean();*/
-
 
         $startTime = microtime(true);
         $results   = parent::track($hitType, $args);
